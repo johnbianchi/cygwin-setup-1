@@ -1,37 +1,59 @@
-$DebugPreference = "Continue"
+# Must have the proper execution policy first:
+# 
+# To set once for all local scripts (http://stackoverflow.com/a/10638/516433):
+#   set-executionpolicy remotesigned
+#
+# To set each time you run this script (http://stackoverflow.com/a/16141428/516433):
+#   Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
-# Configure
-$setupExe = "setup-x86_64.exe"
-$url = "https://cygwin.com/$setupExe"
-$path = [IO.Path]::Combine($env:USERPROFILE, "Downloads", $setupExe)
+$setup_exe = "setup-x86_64.exe"
+$url = "https://cygwin.com/$setup_exe"
+$path = "$env:userprofile\Downloads\$setup_exe"
+      
+"Downloading [$url]`nSaving at [$path]" 
+$client = new-object System.Net.WebClient 
+$client.DownloadFile($url, $path) 
 
-# Download
-$client = New-Object System.Net.WebClient
-Write-Debug "Download [$url] to [$path]"
-$client.DownloadFile($url, $path)
-
-# Install
-Write-Debug "Run [$command]"
 $packages = $(
-    alternatives,
-    autoconf,
-    automake,
-    gcc-core,
-    gcc-g++,
-    git,
-    libcrypt-devel,
-    libxml2,
-    libxml2-devel,
-    make,
-    mkisofs,
-    ncurses,
-    patch,
-    openssl,
-    openssl-devel,
-    openssh,
-    perl,
-    texinfo-tex,
-    texi2html,
-    texlive-collection-latex,
-    unzip
+    "autoconf",
+    "cron",
+    "crypt",
+    "curl",
+    "dos2unix",
+    "gcc-core",
+    "gcc-g++",
+    "gettext-devel",
+    "git",
+    "gnupg",
+    "libarchive",
+    "libarchive-devel",
+    "libcrypt-devel",
+    "libcurl-devel",
+    "libmysqlclient-devel",
+    "libxml2",
+    "libxml2-devel",
+    "make",
+    "mysql",
+    "openssh",
+    "openssl",
+    "patch",
+    "perl",
+    "pv",
+    "unzip",
+    "vim",
+    "wget"
+) -join ','
+
+$args = $(
+    "--quiet-mode",
+    "--upgrade-also",
+    "--root", "C:\cygwin64",
+    "--site", "http://cygwin.mirrors.hoobly.com"
+    "--packages", $packages
 )
+
+"Running [$path $args]"
+
+& "$path" $args
+
+"Done!"
