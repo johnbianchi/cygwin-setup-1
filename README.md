@@ -69,3 +69,10 @@ An additional option `-DryRun` can be used to verify the actual setup command th
 # Write-Host: Would have run [C:\Users\ltheisen\Downloads\setup-x86_64.exe --packages foo,bar]
 ```
 
+Installation
+============
+Install (PsGet)[https://github.com/psget/psget], then:
+
+```powershell
+Install-Module -ModuleUrl https://raw.githubusercontent.com/lucastheisen/cygwin-setup/master/CygwinSetup/CygwinSetup.psm1
+```
