@@ -8,6 +8,9 @@
  .Parameter Config
   The path to a configuration file.  Defaults to $USERPROFILE\.developer\cygwin.json
 
+ .Parameter DryRun
+  Write-Host the command rather than run it
+
  .Example
   # Load config from default location $USERPROFILE/.developer/cygwin.json
   Invoke-CygwinSetup
@@ -18,14 +21,18 @@
 
  .Example
   # Load config from the specified url
-  Invoke-CygwinSetup -Config http://github.com/lucastheisen/cygwin-setup/Example/cygwin.json
+  Invoke-CygwinSetup -Config https://raw.githubusercontent.com/lucastheisen/cygwin-setup/master/Example/cygwin.json
+
+ .Example
+  # Pipe configuration in
+  '{"packages": ["perl","curl"]}' | ConvertFrom-Json | Invoke-CygwinSetup
 #>
 function Invoke-CygwinSetup
 {
     [CmdletBinding()]
     param 
     (
-        [String]
+        [Parameter( ValueFromPipeline=$true)]
         $Config = [IO.Path]::Combine($env:USERPROFILE, ".developer", "cygwin.json"),
 
         [switch]
@@ -41,9 +48,12 @@ function Invoke-CygwinSetup
     #(new-object Net.WebClient).DownloadFile($url, $path) 
 
     Write-Debug "Loading config from [$Config]" 
-    $configHash = $client.DownloadString($config) | 
-        ConvertFrom-Json | 
-        ConvertTo-Hashtable
+    $configJson = $Config
+    if ($Config -is [String]) 
+    {
+        $configJson = Get_ConfigJson($Config)
+    }
+    $configHash = $configJson | ConvertTo-Hashtable
 
     $args = @()
     foreach ($option in $configHash["options"]) 
@@ -72,6 +82,18 @@ function Invoke-CygwinSetup
     }
 
     Write-Debug "Done!"
+}
+
+function Get_ConfigJson 
+{
+    param 
+    (
+        [String]
+        $Config
+    )
+
+    return (New-Object Net.WebClient).DownloadString($Config) | 
+        ConvertFrom-Json;
 }
 
 function ConvertTo-Hashtable 
