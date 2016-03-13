@@ -43,9 +43,11 @@ function Invoke-CygwinSetup
     $url = "https://cygwin.com/$setup_exe"
     $path = [IO.Path]::Combine($env:USERPROFILE, "Downloads", $setup_exe)
           
-    $client = New-Object Net.WebClient
-    Write-Debug "Downloading [$url] to [$path]" 
-    #(new-object Net.WebClient).DownloadFile($url, $path) 
+    if (-not $DryRun) 
+    {
+        Write-Debug "Downloading [$url] to [$path]" 
+        (new-object Net.WebClient).DownloadFile($url, $path) 
+    }
 
     Write-Debug "Loading config from [$Config]" 
     $configJson = $Config
