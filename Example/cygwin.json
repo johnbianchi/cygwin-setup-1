@@ -1,0 +1,35 @@
+{
+    "options": [
+        {"name": "quiet-mode"},
+        {"name": "upgrade-also"},
+        {"name": "root", "value": "C:\\cygwin64"},
+        {"name": "site", "value": "http://cygwin.mirrors.hoobly.com"}
+    ],
+    "packages": [
+        "autoconf",
+        "crypt",
+        "curl",
+        "dos2unix",
+        "gcc-core",
+        "gcc-g++",
+        "gettext-devel",
+        "git",
+        "libarchive",
+        "libarchive-devel",
+        "libcrypt-devel",
+        "libcurl-devel",
+        "libmysqlclient-devel",
+        "libxml2",
+        "libxml2-devel",
+        "make",
+        "mysql",
+        "openssh",
+        "openssl",
+        "patch",
+        "perl",
+        "pv",
+        "unzip",
+        "vim",
+        "wget"
+    ]
+}
