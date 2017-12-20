@@ -39,16 +39,6 @@ function Invoke-CygwinSetup
         $DryRun
     )
 
-    $setup_exe = "setup-x86_64.exe"
-    $url = "https://cygwin.com/$setup_exe"
-    $path = [IO.Path]::Combine($env:USERPROFILE, "Downloads", $setup_exe)
-          
-    if (-not $DryRun) 
-    {
-        Write-Debug "Downloading [$url] to [$path]" 
-        (new-object Net.WebClient).DownloadFile($url, $path) 
-    }
-
     Write-Debug "Loading config from [$Config]" 
     $configJson = $Config
     if ($Config -is [String]) 
@@ -57,6 +47,7 @@ function Invoke-CygwinSetup
     }
     $configHash = $configJson | ConvertTo-Hashtable
 
+    $proxy
     $args = @()
     foreach ($option in $configHash["options"]) 
     {
@@ -67,6 +58,26 @@ function Invoke-CygwinSetup
         {
             $value = $option["value"]
             $args += $value
+        }
+
+        if ($name -eq "proxy") {
+            $proxy = $option["value"]
+        }
+    }
+
+    $setup_exe = "setup-x86_64.exe"
+    $url = "https://cygwin.com/$setup_exe"
+    $path = [IO.Path]::Combine($env:USERPROFILE, "Downloads", $setup_exe)
+
+    if (-not $DryRun)
+    {
+        if ($proxy) {
+            Write-Debug "Downloading [$url] over proxy [$proxy] to [$path]"
+            Invoke-WebRequest -Uri $url -Proxy $proxy -OutFile $path
+        }
+        else {
+            Write-Debug "Downloading [$url] to [$path]"
+            Invoke-WebRequest -Uri $url -OutFile $path
         }
     }
 
