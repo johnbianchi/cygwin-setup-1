@@ -73,7 +73,7 @@ function Invoke-CygwinSetup
     {
         if ($proxy) {
             Write-Debug "Downloading [$url] over proxy [$proxy] to [$path]"
-            Invoke-WebRequest -Uri $url -Proxy $proxy -OutFile $path
+            Invoke-WebRequest -Uri $url -Proxy "http://$proxy" -OutFile $path
         }
         else {
             Write-Debug "Downloading [$url] to [$path]"
