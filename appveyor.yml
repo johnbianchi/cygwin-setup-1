@@ -40,7 +40,7 @@ after_build:
   - git push
   - ps: Add-Type -Assembly "System.IO.Compression.FileSystem"
   - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip", [System.IO.Compression.CompressionLevel]::Fastest, $True)'
-  - ps: Publish-Module -Path "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup" -Name CygwinSetup -NuGetApiKey "$env:powershellgallery_api_key"
+  - ps: Publish-Module -Name "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup" -NuGetApiKey "$env:powershellgallery_api_key"
 
 artifacts:
   - path: '**\*.zip'
