@@ -35,7 +35,7 @@ after_build:
   - git commit -m "update version for appveyor build"
   - git push
   - ps: Add-Type -Assembly "System.IO.Compression.FileSystem"
-  - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip", CompressionLevel.Fastest, true)'
+  - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip", [System.IO.Compression]::CompressionLevel.Fastest, true)'
 
 artifacts:
   - path: '**\*.zip'
