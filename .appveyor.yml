@@ -38,14 +38,13 @@ before_deploy:
   - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip")'
 
 artifacts:
-  - path: CygwinSetup.zip
-    name: modulezip
+  - path: '**\*.zip'
 
 deploy:
   release: cygwin-setup-v$(appveyor_build_version)
   provider: GitHub
   auth_token: $(git_access_token)
-  artifact: modulezip
+  artifact: CygwinSetup.zip
   draft: false
   prerelease: false
   on:
