@@ -27,7 +27,7 @@ CompanyName = 'pastdev'
 Copyright = '(c) 2016 pastdev. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'Provides an automated approach to managing a Cygwin installation'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
