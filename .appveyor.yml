@@ -31,7 +31,6 @@ before_deploy:
   - git config --global user.email "lucastheisen@pastdev.com"
   - git config --global user.name "Lucas Theisen"  
   - git checkout master
-  - git merge
   - git add CygwinSetup/CygwinSetup.psd1
   - git commit -m "update version for appveyor build"
   - git push
@@ -39,8 +38,7 @@ before_deploy:
 deploy:
   release: cygwin-setup-v$(appveyor_build_version)
   provider: GitHub
-  auth_token:
-    secure: $(git_access_token)
+  auth_token: $(git_access_token)
   artifact: /.*\.psm1/
   draft: false
   prerelease: false
