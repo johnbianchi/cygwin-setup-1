@@ -41,7 +41,7 @@ artifacts:
   - path: '**\*.zip'
 
 deploy:
-  release: cygwin-setup-v$(appveyor_build_version)
+  tag: cygwin-setup-v$(appveyor_build_version)
   provider: GitHub
   auth_token: $(git_access_token)
   artifact: CygwinSetup.zip
@@ -49,4 +49,4 @@ deploy:
   prerelease: false
   on:
     branch: master
-    appveyor_repo_tag: true
+    appveyor_repo_tag: false
