@@ -41,7 +41,7 @@ deploy:
   release: cygwin-setup-v$(appveyor_build_version)
   provider: GitHub
   auth_token: $(git_access_token)
-  artifact: /CygwinSetup.zip/
+  artifact: $(appveyor_build_folder)\CygwinSetup.zip
   draft: false
   prerelease: false
   on:
