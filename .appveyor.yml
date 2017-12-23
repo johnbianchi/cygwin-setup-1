@@ -2,6 +2,10 @@
 # Inspired by https://github.com/rubrikinc/PowerShell-Module/blob/master/appveyor.yml
 version: 1.0.0.{build}
 
+environment:
+  git_access_token:
+    secure: on2+skcAH10Q4hezntmzYSh9CPbrDwTc7PSjmtu2pMNI4K3OZwoHZ0K9tmG8w6ZO
+
 skip_commits:
   files:
     - README.md
@@ -19,8 +23,25 @@ build_script:
   - ps: Write-Host "Nothing to build"
 
 before_deploy:
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_access_token):x-oauth-basic@github.com`n"
   - git config --global core.autocrlf false
   - git config --global core.filemode false
   - git config --global core.safecrlf false
   - git config --global user.email "lucastheisen@pastdev.com"
   - git config --global user.name "Lucas Theisen"  
+  - git add CygwinSetup/CygwinSetup.psd1
+  - git commit -m "update version for appveyor build"
+  - git push
+
+deploy:
+  release: cygwin-setup-v$(appveyor_build_version)
+  provider: GitHub
+  auth_token:
+    secure: $(git_access_token)
+  artifact: /.*\.psm1/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: false
