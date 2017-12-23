@@ -1,0 +1,12 @@
+---
+# Inspired by https://github.com/rubrikinc/PowerShell-Module/blob/master/appveyor.yml
+build: off
+version: 1.0.0.{build}
+
+skip_commits:
+  files:
+    - README.md
+  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/
+
+pull_requests:
+  do_not_increment_build_number: true
