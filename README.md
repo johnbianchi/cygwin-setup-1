@@ -71,8 +71,8 @@ An additional option `-DryRun` can be used to verify the actual setup command th
 
 Installation
 ============
-Install [PsGet](https://github.com/psget/psget), then:
+Now deployed to [PowerShellGallery](https://www.powershellgallery.com/packages/CygwinSetup)
 
 ```powershell
-Install-Module -ModuleUrl https://raw.githubusercontent.com/lucastheisen/cygwin-setup/master/CygwinSetup/CygwinSetup.psm1
+Install-Module -Name CygwinSetup
 ```
