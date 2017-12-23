@@ -15,6 +15,9 @@ build: off
 before_build: 
   - ps: Update-ModuleManifest -ModuleVersion "$env:APPVEYOR_BUILD_VERSION" -Path "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup\CygwinSetup.psd1"
 
+build_script:
+  - ps: Write-Host "Nothing to build"
+
 before_deploy:
   - git config --global core.autocrlf false
   - git config --global core.filemode false
