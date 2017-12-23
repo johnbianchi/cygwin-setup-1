@@ -2,6 +2,8 @@
 # Inspired by https://github.com/rubrikinc/PowerShell-Module/blob/master/appveyor.yml
 version: 1.0.0.{build}
 
+skip_tags: true
+
 skip_commits:
   files:
     - README.md
