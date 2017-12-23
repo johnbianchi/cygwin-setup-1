@@ -13,6 +13,4 @@ pull_requests:
 build: off
 
 build_script: |
-  Update-ModuleManifest `
-      -Path "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup\CygwinSetup.psd1" `
-      -Version "$env:APPVEYOR_BUILD_VERSION"
+  Update-ModuleManifest -ModuleVersion "$env:APPVEYOR_BUILD_VERSION" -Path "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup\CygwinSetup.psd1"
