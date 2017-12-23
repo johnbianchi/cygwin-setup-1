@@ -30,6 +30,7 @@ before_deploy:
   - git config --global core.safecrlf false
   - git config --global user.email "lucastheisen@pastdev.com"
   - git config --global user.name "Lucas Theisen"  
+  - ps: Write-Host "DEBUG"
   - git remote -vv
   - ps: gci -Recurse
   - git add CygwinSetup/CygwinSetup.psd1
