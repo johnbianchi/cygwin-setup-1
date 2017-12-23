@@ -34,12 +34,15 @@ before_deploy:
   - git add CygwinSetup/CygwinSetup.psd1
   - git commit -m "update version for appveyor build"
   - git push
+  - ps: |
+    Add-Type -Assembly "System.IO.Compression.FileSystem" ;
+    [System.IO.Compression.ZipFile]::CreateFromDirectory("CygwinSetup", "CygwinSetup.zip") ;
 
 deploy:
   release: cygwin-setup-v$(appveyor_build_version)
   provider: GitHub
   auth_token: $(git_access_token)
-  artifact: /.*\.psm1/
+  artifact: /CygwinSetup.zip/
   draft: false
   prerelease: false
   on:
