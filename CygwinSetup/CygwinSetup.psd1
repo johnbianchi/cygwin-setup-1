@@ -12,7 +12,7 @@
 RootModule = 'CygwinSetup.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.0.49'
+ModuleVersion = '1.0.0.51'
 
 # ID used to uniquely identify this module
 GUID = 'b0f9bb13-0da0-4551-a5a4-13d816c680e1'
