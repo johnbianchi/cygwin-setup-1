@@ -12,6 +12,8 @@ skip_commits:
 environment:
   git_access_token:
     secure: on2+skcAH10Q4hezntmzYSh9CPbrDwTc7PSjmtu2pMNI4K3OZwoHZ0K9tmG8w6ZO
+  powershellgallery_api_key:
+    secure: wBMhSioFPCeI4m1nakLCoVx9UjK/8Q1eWaLBWy4FA3L6GH4nAbkqazFw9Uv0TU8v
 
 pull_requests:
   do_not_increment_build_number: true
@@ -38,6 +40,7 @@ after_build:
   - git push
   - ps: Add-Type -Assembly "System.IO.Compression.FileSystem"
   - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip", [System.IO.Compression.CompressionLevel]::Fastest, $True)'
+  - ps: Publish-Module -Path "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup" -Name CygwinSetup -NuGetApiKey "$env:powershellgallery_api_key"
 
 artifacts:
   - path: '**\*.zip'
