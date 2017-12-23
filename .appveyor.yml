@@ -1,6 +1,5 @@
 ---
 # Inspired by https://github.com/rubrikinc/PowerShell-Module/blob/master/appveyor.yml
-build: off
 version: 1.0.0.{build}
 
 skip_commits:
@@ -10,3 +9,5 @@ skip_commits:
 
 pull_requests:
   do_not_increment_build_number: true
+
+build: off
