@@ -32,7 +32,7 @@ after_build:
   - git config --global user.name "Lucas Theisen"  
   - git checkout master
   - git add CygwinSetup/CygwinSetup.psd1
-  - git commit -m "update version for appveyor build"
+  - git commit -m "[skip ci] update version during build"
   - git push
   - ps: Add-Type -Assembly "System.IO.Compression.FileSystem"
   - ps: '[System.IO.Compression.ZipFile]::CreateFromDirectory("$env:APPVEYOR_BUILD_FOLDER\CygwinSetup", "$env:APPVEYOR_BUILD_FOLDER\CygwinSetup.zip", [System.IO.Compression.CompressionLevel]::Fastest, $True)'
