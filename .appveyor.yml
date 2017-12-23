@@ -30,9 +30,8 @@ before_deploy:
   - git config --global core.safecrlf false
   - git config --global user.email "lucastheisen@pastdev.com"
   - git config --global user.name "Lucas Theisen"  
-  - ps: Write-Host "DEBUG"
-  - git remote -vv
-  - ps: git diff
+  - git checkout master
+  - git merge
   - git add CygwinSetup/CygwinSetup.psd1
   - git commit -m "update version for appveyor build"
   - git push
