@@ -22,7 +22,7 @@ before_build:
 build_script:
   - ps: Write-Host "Nothing to build"
 
-before_deploy:
+after_build:
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_access_token):x-oauth-basic@github.com`n"
   - git config --global core.autocrlf false
