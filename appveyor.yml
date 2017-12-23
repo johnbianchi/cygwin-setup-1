@@ -2,14 +2,14 @@
 # Inspired by https://github.com/rubrikinc/PowerShell-Module/blob/master/appveyor.yml
 version: 1.0.0.{build}
 
-environment:
-  git_access_token:
-    secure: on2+skcAH10Q4hezntmzYSh9CPbrDwTc7PSjmtu2pMNI4K3OZwoHZ0K9tmG8w6ZO
-
 skip_commits:
   files:
     - README.md
-#   message: /updated readme.*|update docs.*|update version.*|update appveyor.*/
+  message: /updated readme.*|update docs.*|update version.*|update appveyor.*/
+
+environment:
+  git_access_token:
+    secure: on2+skcAH10Q4hezntmzYSh9CPbrDwTc7PSjmtu2pMNI4K3OZwoHZ0K9tmG8w6ZO
 
 pull_requests:
   do_not_increment_build_number: true
